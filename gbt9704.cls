@@ -7,7 +7,7 @@
 
 % \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 % \ProcessKeyvalOptions*
-\LoadClass[UTF8,scheme=chinese]{ctexart}
+\LoadClass[UTF8,AutoFakeBold,scheme=chinese]{ctexart}
 
 \renewcommand{\normalsize}{\fontsize{16pt}{22pt}}
 
@@ -39,27 +39,29 @@
     space=auto,
     autoindent=true,% 首行缩进 2 字符
     section={% 一级节标题
-        format=\heiti,
-        aftername=\hspace{\ccwd},% 节编号与标题内容默认\quad，改为间距一个汉字
+        format=\heiti\centering,
+        aftername=\hspace{\ccwd},
+        name={,、},
         number=\chinese{section},
-        % nameformat={},% 默认已经为空
-        % titleformat={},% 默认已经为空
-        % nameformat=\tongji@title@font\sihao,% 默认为空，改为比中文小一号
-        % afterindent=true,
-        % beforeskip={24bp \@plus 1ex \@minus .2ex},
-        % afterskip={6bp \@plus .2ex},
         },
     subsection={
-        format=\kaiti,
-        aftername=\hspace{\ccwd},% 章节编号与标题内容间距一个汉字
-        number=（\chinese{section}）,
-        % nameformat=\tongji@title@font\banxiaosi,% 默认为空，改为比中文小一号
-        % afterindent=true,
-        % beforeskip={12bp \@plus 1ex \@minus .2ex},
-        % afterskip={6bp \@plus .2ex},
+        format=\kaishu,
+        aftername=\hspace{\ccwd},
+        number=（\chinese{subsection}）,
         },
+    subsubsection={
+        format=\bfseries\fangsong,
+        aftername=\hspace{\ccwd},
+        number=\arabic{subsubsection},
+    },
+    paragraph={
+        format=\bfseries\centering,
+        % titleformat={},
+        % nameformat={},
+        % aftername=\hspace{\ccwd},
+    },
     }
 \AtBeginDocument{%
-  \pagestyle{empty}
+    \pagestyle{empty}
 %   \pagenumbering{roman}
 }
