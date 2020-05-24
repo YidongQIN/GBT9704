@@ -2,12 +2,14 @@
 \ProvidesClass{gbt9704}[2020/05/24 Authorities Documents LaTeX Template with GB/T 9704]
 
 \RequirePackage{kvoptions}
-\DeclareBoolOption{electronic}% 打印红头 或 留出空白红头间距
-% TODO 结合pkg{fancyhdy} 控制首页行为
+\DeclareBoolOption{redheading}% 打印红头 或 留出空白红头间距
 
 % \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 % \ProcessKeyvalOptions*
 \LoadClass[UTF8,AutoFakeBold,scheme=chinese]{ctexart}
+
+\def\@refnumber{0000}
+\newcommand{\refnumber}[1]{\def\@refnumber{#1}}
 
 \renewcommand{\normalsize}{\fontsize{16pt}{22pt}}
 
@@ -26,13 +28,27 @@
 \setCJKmainfont{FangSong}
 
 \RequirePackage{fancyhdr}
+\fancypagestyle{plain}{
+    \fancyfoot[C]{-\zihao{4}\thepage-}
+}
 
 \RequirePackage{graphicx}
 
-\newcommand{\docnum}[1]{#1}
-
-% \renewcommand{\maketitle}{}% TODO 打印标题和文号
-% \renewcommand{\makesignature}{}% TODO 打印落款和日期
+\renewcommand\maketitle{% 打印标题和文号
+    \begin{center}%
+    \zihao{-2} \@title \\
+    \vspace{1ex}
+    \zihao{5} \@refnumber \\
+    \normalsize
+    \end{center}
+    }
+\newcommand{\makesignature}{% 打印落款和日期
+    \hfill
+    \begin{tabular}[t]{c}%
+        \@author \\
+        \@date
+    \end{tabular}
+}
 
 \ctexset{%
     punct=quanjiao,% 标点符号用全角
@@ -55,13 +71,15 @@
         number=\arabic{subsubsection},
     },
     paragraph={
-        format=\bfseries\centering,
+        format={},% \heiti\centering,
         % titleformat={},
         % nameformat={},
         % aftername=\hspace{\ccwd},
     },
     }
 \AtBeginDocument{%
-    \pagestyle{empty}
-%   \pagenumbering{roman}
+    \pagestyle{plain}
+    \pagenumbering{arabic}
+    % \newgeometry
+    % \restoregeometry
 }
