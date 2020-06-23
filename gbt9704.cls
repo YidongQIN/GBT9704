@@ -6,7 +6,7 @@
 
 % \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 % \ProcessKeyvalOptions*
-\LoadClass[UTF8,AutoFakeBold,scheme=plain,linespread=1.5,]{ctexbook}
+\LoadClass[UTF8,AutoFakeBold=1.2,scheme=plain,linespread=1.5,]{ctexbook}
 
 % 5.2.1 页边与版心尺寸
 \RequirePackage{geometry}
@@ -61,7 +61,6 @@
     \end{center}
     }
 
-
 % 7.3.2 主送机关
 
 
@@ -74,45 +73,52 @@
     chapter={% 一级节标题
         format=\heiti\centering,
         name={,、},
+        aftername=\hspace{0.5\ccwd},
         aftername={},
         number=\chinese{chapter},
         nameformat={},
         titleformat={},
-        afterindent = true,
-        beforeskip=14pt,
-        afterskip=14pt,
+        afterindent=true,
+        beforeskip=0pt,
+        afterskip=0pt,
+        break={},% 不会另起一页
         },
     section={
         format=\kaishu,
         name={（,）},
+        aftername=\hspace{0.5\ccwd},
         number=\chinese{section},
-        afterindent = true,
-        beforeskip=14pt,
-        afterskip=14pt,
+        afterindent=true,
+        beforeskip=0pt,
+        afterskip=0pt,
         },
     subsection={
-        format=\bfseries\fangsong,
+        format=\fangsong,
         name={,.},
+        aftername=\hspace{0.5\ccwd},
         number=\arabic{subsection},
-        titleformat=\bfseries\fangsong,
-        afterindent = true,
-        beforeskip=14pt,
-        afterskip=14pt,
+        nameformat={},
+        titleformat={},
+        afterindent=true,
+        beforeskip=0pt,
+        afterskip=0pt,
     },
     subsubsection={
         format=\fangsong,
         name={（,）},
+        aftername=\hspace{0.5\ccwd},
         number=\arabic{subsubsection},
-        afterindent = true,
-        beforeskip=14pt,
-        afterskip=14pt,
+        nameformat={},
+        afterindent=true,
+        beforeskip=0pt,
+        afterskip=0pt,
     },
     paragraph={
         format={},% \heiti\centering,
         % titleformat={},
         % nameformat={},
         % aftername=\hspace{\ccwd},
-        afterindent = true,
+        afterindent=true,
     },
 }
 
