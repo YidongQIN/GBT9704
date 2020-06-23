@@ -3,5 +3,8 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"latex-workshop.latex.autoBuild.run": "onFileChange"
+	}
 }

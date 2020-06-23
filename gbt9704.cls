@@ -6,42 +6,45 @@
 
 % \DeclareDefaultOption{\PassOptionsToClass{\CurrentOption}{ctexbook}}
 % \ProcessKeyvalOptions*
-\LoadClass[UTF8,AutoFakeBold,scheme=chinese]{ctexart}
+\LoadClass[UTF8,AutoFakeBold,scheme=plain,linespread=1.5,]{ctexbook}
 
-\def\@refnumber{0000}
-\newcommand{\refnumber}[1]{\def\@refnumber{#1}}
-
-\renewcommand{\normalsize}{\fontsize{16pt}{22pt}}
-
+% 5.2.1 页边与版心尺寸
 \RequirePackage{geometry}
 \geometry{
     a4paper,% 210 * 297mm
-    % nomarginpar,% 即\marginparwidth=0pt and \marginparsep=0pt
-    % hcentering,% 将hmarginratio设为1:1，即left=right
+    nomarginpar,% 即\marginparwidth=0pt and \marginparsep=0pt
+    hcentering,% 将hmarginratio设为1:1，即left=right
     left=28mm,% 注意left=right
     top=37.00mm,% Word 模板页眉顶端距离20mm
     width=156mm,
     height=225mm,
     }
 
-\RequirePackage{fontspec}
+% 5.2.2 字体和字号
+\renewcommand{\normalsize}{\zihao{3}}
 \setCJKmainfont{FangSong}
+% 7.2.1 份号
 
-\RequirePackage{fancyhdr}
-\fancypagestyle{plain}{
-    \fancyfoot[C]{-\zihao{4}\thepage-}
-}
+% 7.2.2 密级和保密期限
 
-\RequirePackage{graphicx}
 
-\renewcommand\maketitle{% 打印标题和文号
+% 7.2.3 紧急程度
+
+
+% 7.2.4 发文机关标志
+
+
+% 7.2.5 发文字号
+\def\@refnumber{0000}
+\newcommand{\refnumber}[1]{\def\@refnumber{#1}}
+\newcommand{\makerefnumber}{
     \begin{center}%
-    \zihao{-2} \@title \\
-    \vspace{1ex}
-    \zihao{5} \@refnumber \\
-    \normalsize
+        {\zihao{5}\@refnumber}
+        \normalsize
     \end{center}
     }
+
+% 7.2.6 签发人
 \newcommand{\makesignature}{% 打印落款和日期
     \hfill
     \begin{tabular}[t]{c}%
@@ -50,36 +53,80 @@
     \end{tabular}
 }
 
+% 7.3.1 标题
+\renewcommand\maketitle{% 打印标题和文号
+    \begin{center}%
+    {\zihao{-2}\songti\@title} \\
+    \normalsize
+    \end{center}
+    }
+
+
+% 7.3.2 主送机关
+
+
+% 7.3.3 正文
+\setcounter{secnumdepth}{3}% 章节编号深度
 \ctexset{%
     punct=quanjiao,% 标点符号用全角
     space=auto,
     autoindent=true,% 首行缩进 2 字符
-    section={% 一级节标题
+    chapter={% 一级节标题
         format=\heiti\centering,
-        aftername=\hspace{\ccwd},
         name={,、},
+        aftername={},
+        number=\chinese{chapter},
+        nameformat={},
+        titleformat={},
+        afterindent = true,
+        beforeskip=14pt,
+        afterskip=14pt,
+        },
+    section={
+        format=\kaishu,
+        name={（,）},
         number=\chinese{section},
+        afterindent = true,
+        beforeskip=14pt,
+        afterskip=14pt,
         },
     subsection={
-        format=\kaishu,
-        aftername=\hspace{\ccwd},
-        number=（\chinese{subsection}）,
-        },
-    subsubsection={
         format=\bfseries\fangsong,
-        aftername=\hspace{\ccwd},
+        name={,.},
+        number=\arabic{subsection},
+        titleformat=\bfseries\fangsong,
+        afterindent = true,
+        beforeskip=14pt,
+        afterskip=14pt,
+    },
+    subsubsection={
+        format=\fangsong,
+        name={（,）},
         number=\arabic{subsubsection},
+        afterindent = true,
+        beforeskip=14pt,
+        afterskip=14pt,
     },
     paragraph={
         format={},% \heiti\centering,
         % titleformat={},
         % nameformat={},
         % aftername=\hspace{\ccwd},
+        afterindent = true,
     },
-    }
+}
+
+% 7.5 页码
+\RequirePackage{fancyhdr}
+\fancypagestyle{plain}{
+    \fancyhead{}
+    \renewcommand\headrulewidth{0pt}% 取消页眉中的装饰分割线。
+    \fancyfoot[C]{--- {\zihao{4}\thepage} ---}
+}
+
+    \RequirePackage{graphicx}
+
 \AtBeginDocument{%
     \pagestyle{plain}
     \pagenumbering{arabic}
-    % \newgeometry
-    % \restoregeometry
 }
