@@ -5,6 +5,20 @@
 		}
 	],
 	"settings": {
-		"latex-workshop.latex.autoBuild.run": "onFileChange"
+		"latex-workshop.latex.autoBuild.run": "onFileChange",
+		"latex-workshop.latex.recipes": [
+			{
+				"name": "latexmk (xelatex)",
+				"tools": [
+					"xelatex"
+				]
+			},
+			{
+				"name": "latexmk 🔃",
+				"tools": [
+					"latexmk"
+				]
+			},
+		]
 	}
 }
